@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
+
 void pattern1(int n)
 {
     for (int i = 1; i <= n; i++)
@@ -150,31 +151,29 @@ void pattern11(int n)
         cout << endl;
     }
 }
+
 void pattern12(int n)
 {
     for (int i = 1; i <= n; i++)
     {
 
-        int start = 1;
-
         for (int j = 1; j <= i; j++)
         {
-            cout << start;
-            start++;
+            cout << j;
         }
         for (int j = 1; j <= 2 * (n - i); j++)
         {
             cout << " ";
         }
-        start--;
-        for (int j = 1; j <= i; j++)
+
+        for (int j = i; j >= 1; j--)
         {
-            cout << start;
-            start--;
+            cout << j;
         }
         cout << endl;
     }
 }
+
 void pattern13(int n)
 {
     int start = 1;
@@ -189,30 +188,29 @@ void pattern13(int n)
         cout << endl;
     }
 }
+
 void pattern14(int n)
 {
 
     for (int i = 1; i <= n; i++)
     {
         char start = 'A';
-        for (int j = 1; j <= i; j++)
+        for (char j = 'A'; j < 'A' + i; j++)
         {
-            cout << start;
-            start++;
+            cout << j;
         }
         cout << endl;
     }
 }
+
 void pattern15(int n)
 {
 
-    for (int i = n; i >= 1; i--)
+    for (int i = 1; i <= n; i++)
     {
-        char start = 'A';
-        for (int j = 1; j <= i; j++)
+        for (char j = 'A'; j <= 'A' + (n - i); j++)
         {
-            cout << start;
-            start++;
+            cout << j;
         }
         cout << endl;
     }
@@ -220,17 +218,19 @@ void pattern15(int n)
 
 void pattern16(int n)
 {
-    char start = 'A';
+
     for (int i = 1; i <= n; i++)
     {
+        char start = 'A' + i - 1;
         for (int j = 1; j <= i; j++)
         {
             cout << start;
         }
-        start++;
+
         cout << endl;
     }
 }
+
 void pattern17(int n)
 {
 
@@ -241,17 +241,16 @@ void pattern17(int n)
             cout << " ";
         }
         char start = 'A';
-        for (int j = 1; j <= i; j++)
+        int breakPoint = i;
+        for (int j = 1; j <= (2 * i) - 1; j++)
         {
             cout << start;
-            start++;
+            if (j < breakPoint)
+                start++;
+            else
+                start--;
         }
-        start -= 2;
-        for (int j = 1; j <= i - 1; j++)
-        {
-            cout << start;
-            start--;
-        }
+
         for (int j = 1; j <= n - i; j++)
         {
             cout << " ";
@@ -262,15 +261,18 @@ void pattern17(int n)
 
 void pattern18(int n)
 {
-
     for (int i = 1; i <= n; i++)
     {
 
-        char start = 'A' + (n - i);
-        for (int j = 1; j <= i; j++)
+        // for (int j = 1; j <= i; j++)
+        // {
+        //     char start = 'A' + (n - i) + j - 1;
+        //     cout << start;
+        // }
+
+        for (char j = 'A' + (n - i); j <= 'A' + (n - 1); j++)
         {
-            cout << start;
-            start++;
+            cout << j;
         }
         cout << endl;
     }
@@ -298,8 +300,11 @@ void pattern19Part1(int n)
         cout << endl;
     }
 }
+
 void pattern19Part2(int n)
 {
+
+    int iniSpace = (2 * n) - 2;
 
     for (int i = n; i >= 1; i--)
     {
@@ -309,7 +314,7 @@ void pattern19Part2(int n)
             cout << "*";
         }
 
-        for (int j = 1; j <= 2 * (i - 1); j++)
+        for (int j = 1; j <= iniSpace; j++)
         {
             cout << " ";
         }
@@ -318,8 +323,10 @@ void pattern19Part2(int n)
             cout << "*";
         }
         cout << endl;
+        iniSpace -= 2;
     }
 }
+
 void pattern19(int n)
 {
     pattern19Part1(n);
@@ -354,38 +361,49 @@ void pattern20(int n)
         cout << endl;
     }
 }
+
 void pattern21(int n)
 {
-    for (int i = 1; i <= (2 * n) - 1; i++)
+    for (int i = 1; i <= n; i++)
     {
 
-        int stars = i;
-        if (i > n)
-            stars = (2 * n) - i;
+        for (int j = 1; j <= n; j++)
+        {
+            if (i == 1 || i == n || j == 1 || j == n)
+            {
+                cout << "*";
+            }
+            else
+            {
+                cout << " ";
+            }
+        }
 
-        for (int j = 1; j <= stars; j++)
-        {
-            cout << "*";
-        }
-        int space = 2 * (n - i);
-        if (i > n)
-            space = (i - n) * 2;
+        cout << endl;
+    }
+}
 
-        for (int j = 1; j <= space; j++)
+void pattern22(int n)
+{
+    for (int i = 0; i < (2 * n) - 1; i++)
+    {
+
+        for (int j = 0; j < (2 * n) - 1; j++)
         {
-            cout << " ";
+            int top = i;
+            int left = j;
+            int right = ((2 * n) - 2) - j;
+            int bottom = ((2 * n) - 2) - i;
+            cout << n - min(min(top, bottom), min(left, right)) << " ";
         }
-        for (int j = 1; j <= stars; j++)
-        {
-            cout << "*";
-        }
+
         cout << endl;
     }
 }
 
 int main()
 {
-    int n = 5;
-    pattern21(n);
+    int n = 4;
+    pattern22(n);
     return 0;
 }
